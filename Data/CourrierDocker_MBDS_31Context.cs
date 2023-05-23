@@ -14,14 +14,14 @@ namespace CourrierDocker_MBDS_31.Data
         {
         }
 
-        public DbSet<CourrierDocker_MBDS_31.modeles.Movie> Movie { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.account.MyUser> MyUser { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.courrier.Commentaire> Commentaire { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.courrier.Courrier> Courrier { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.courrier.Destinataire> Destinataire { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.courrier.FichierJoint> FichierJoint { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.courrier.Priorite> Priorite { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.structure.Departement> Departement { get; set; } = default!;
-        public DbSet<CourrierDocker_MBDS_31.modeles.structure.Poste> Poste { get; set; } = default!;
+        public DbSet<Movie> Movie { get; set; } = default!;
+        public DbSet<modeles.account.MyUser> MyUser { get; set; } = default!;
+        public DbSet<modeles.courrier.Commentaire> Commentaire { get; set; } = default!;
+        public DbSet<modeles.courrier.Courrier> Courrier { get; set; } = default!;
+        public DbSet<modeles.courrier.Destinataire> Destinataire { get; set; } = default!;
+        public DbSet<modeles.courrier.FichierJoint> FichierJoint { get; set; } = default!;
+        public DbSet<modeles.courrier.Priorite> Priorite { get; set; } = default!;
+        public DbSet<modeles.structure.Departement> Departement { get; set; } = default!;
+        public DbSet<modeles.structure.Poste> Poste { get; set; } = default!;
     }
 }

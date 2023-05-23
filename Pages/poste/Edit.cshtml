@@ -1,0 +1,40 @@
+﻿@page
+@model CourrierDocker_MBDS_31.Pages.poste.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Poste</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Poste.Id" />
+            <div class="form-group">
+                <label asp-for="Poste.Val" class="control-label"></label>
+                <input asp-for="Poste.Val" class="form-control" />
+                <span asp-validation-for="Poste.Val" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poste.Desc" class="control-label"></label>
+                <input asp-for="Poste.Desc" class="form-control" />
+                <span asp-validation-for="Poste.Desc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
