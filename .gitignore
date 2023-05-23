@@ -1,0 +1,60 @@
+# Visual Studio / Visual Studio Code
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# NuGet
+*.nuget.props
+*.nuget.targets
+
+# MSTest
+testresults/
+
+# ReSharper
+_ReSharper*/
+*.resharper
+*.[Rr]e[Ss]harper
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# Build tools
+msbuild.log
+msbuild.err
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Package files
+*.nupkg
+*.pupkg
+*.snupkg
+!*.sln.nuget.cache
+*.sln.nuget.cache.gz
+# Old package restore
+.nuget/
+
+# Erlang
+*.o
+*.beam
+*.bak

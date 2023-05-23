@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\CourrierDocker_MBDS_31.props" />
+</Project>
