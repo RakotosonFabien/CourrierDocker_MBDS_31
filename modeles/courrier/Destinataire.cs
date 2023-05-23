@@ -7,13 +7,13 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
     public class Destinataire
     {
         public int Id { get; set; }
-        public DateTime DateTransmission { get; set; }
-        public DateTime DateRecepSec { get; set; }
-        public DateTime DateRecepDr { get; set; }
+        public DateTime? DateTransmission { get; set; }
+        public DateTime? DateRecepSec { get; set; }
+        public DateTime? DateRecepDr { get; set; }
         [Column("id_dep_dest")]
-        public Departement? DepDest { get; set;}
+        public Departement DepDest { get; set;}
         [Column("id_courrier")]
-        public Courrier? Courrier { get; set;}
+        public Courrier Courrier { get; set;}
 
     }
 }

@@ -26,6 +26,22 @@ namespace CourrierDocker_MBDS_31.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Movie",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Genre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movie", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Poste",
                 columns: table => new
                 {
@@ -59,15 +75,13 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Prenom = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Prenom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateNaissance = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdDepartement = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserDepartementId = table.Column<int>(type: "int", nullable: true),
-                    IdPoste = table.Column<int>(type: "int", nullable: false),
-                    UserPostId = table.Column<int>(type: "int", nullable: true)
+                    UserPosteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,8 +92,8 @@ namespace CourrierDocker_MBDS_31.Migrations
                         principalTable: "Departement",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_MyUser_Poste_UserPostId",
-                        column: x => x.UserPostId,
+                        name: "FK_MyUser_Poste_UserPosteId",
+                        column: x => x.UserPosteId,
                         principalTable: "Poste",
                         principalColumn: "Id");
                 });
@@ -90,15 +104,12 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    objet = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    dateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    contenu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdExpediteur = table.Column<int>(type: "int", nullable: false),
+                    Objet = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Contenu = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExpediteurId = table.Column<int>(type: "int", nullable: true),
-                    IdCreateur = table.Column<int>(type: "int", nullable: false),
-                    CreateurId = table.Column<int>(type: "int", nullable: true),
-                    IdPriorite = table.Column<int>(type: "int", nullable: false),
-                    prioriteId = table.Column<int>(type: "int", nullable: true)
+                    CreateurId = table.Column<int>(type: "int", nullable: false),
+                    PrioriteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,15 +118,16 @@ namespace CourrierDocker_MBDS_31.Migrations
                         name: "FK_Courrier_MyUser_CreateurId",
                         column: x => x.CreateurId,
                         principalTable: "MyUser",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Courrier_MyUser_ExpediteurId",
                         column: x => x.ExpediteurId,
                         principalTable: "MyUser",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Courrier_Priorite_prioriteId",
-                        column: x => x.prioriteId,
+                        name: "FK_Courrier_Priorite_PrioriteId",
+                        column: x => x.PrioriteId,
                         principalTable: "Priorite",
                         principalColumn: "Id");
                 });
@@ -126,24 +138,23 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    contenu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    dateCommentaire = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdCourrier = table.Column<int>(type: "int", nullable: false),
-                    courrierId = table.Column<int>(type: "int", nullable: true),
-                    IdCommentateur = table.Column<int>(type: "int", nullable: false),
-                    commentateurId = table.Column<int>(type: "int", nullable: true)
+                    Contenu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCommentaire = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CourrierId = table.Column<int>(type: "int", nullable: false),
+                    CommentateurId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Commentaire", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Commentaire_Courrier_courrierId",
-                        column: x => x.courrierId,
+                        name: "FK_Commentaire_Courrier_CourrierId",
+                        column: x => x.CourrierId,
                         principalTable: "Courrier",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Commentaire_MyUser_commentateurId",
-                        column: x => x.commentateurId,
+                        name: "FK_Commentaire_MyUser_CommentateurId",
+                        column: x => x.CommentateurId,
                         principalTable: "MyUser",
                         principalColumn: "Id");
                 });
@@ -154,27 +165,27 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    dateTransmission = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dateReceptionSecretaire = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    dateReceptionDirecteur = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdDepartementDestinataire = table.Column<int>(type: "int", nullable: false),
-                    departementDestinataireId = table.Column<int>(type: "int", nullable: true),
-                    IdCourrier = table.Column<int>(type: "int", nullable: false),
-                    courrierId = table.Column<int>(type: "int", nullable: true)
+                    DateTransmission = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateRecepSec = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateRecepDr = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DepDestId = table.Column<int>(type: "int", nullable: false),
+                    CourrierId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Destinataire", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Destinataire_Courrier_courrierId",
-                        column: x => x.courrierId,
+                        name: "FK_Destinataire_Courrier_CourrierId",
+                        column: x => x.CourrierId,
                         principalTable: "Courrier",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Destinataire_Departement_departementDestinataireId",
-                        column: x => x.departementDestinataireId,
+                        name: "FK_Destinataire_Departement_DepDestId",
+                        column: x => x.DepDestId,
                         principalTable: "Departement",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,29 +194,28 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    path = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdCourrier = table.Column<int>(type: "int", nullable: false),
-                    courrierId = table.Column<int>(type: "int", nullable: true)
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourrierId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FichierJoint", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FichierJoint_Courrier_courrierId",
-                        column: x => x.courrierId,
+                        name: "FK_FichierJoint_Courrier_CourrierId",
+                        column: x => x.CourrierId,
                         principalTable: "Courrier",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Commentaire_commentateurId",
+                name: "IX_Commentaire_CommentateurId",
                 table: "Commentaire",
-                column: "commentateurId");
+                column: "CommentateurId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Commentaire_courrierId",
+                name: "IX_Commentaire_CourrierId",
                 table: "Commentaire",
-                column: "courrierId");
+                column: "CourrierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courrier_CreateurId",
@@ -218,24 +228,24 @@ namespace CourrierDocker_MBDS_31.Migrations
                 column: "ExpediteurId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courrier_prioriteId",
+                name: "IX_Courrier_PrioriteId",
                 table: "Courrier",
-                column: "prioriteId");
+                column: "PrioriteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destinataire_courrierId",
+                name: "IX_Destinataire_CourrierId",
                 table: "Destinataire",
-                column: "courrierId");
+                column: "CourrierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destinataire_departementDestinataireId",
+                name: "IX_Destinataire_DepDestId",
                 table: "Destinataire",
-                column: "departementDestinataireId");
+                column: "DepDestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FichierJoint_courrierId",
+                name: "IX_FichierJoint_CourrierId",
                 table: "FichierJoint",
-                column: "courrierId");
+                column: "CourrierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MyUser_UserDepartementId",
@@ -243,9 +253,9 @@ namespace CourrierDocker_MBDS_31.Migrations
                 column: "UserDepartementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MyUser_UserPostId",
+                name: "IX_MyUser_UserPosteId",
                 table: "MyUser",
-                column: "UserPostId");
+                column: "UserPosteId");
         }
 
         /// <inheritdoc />
@@ -259,6 +269,9 @@ namespace CourrierDocker_MBDS_31.Migrations
 
             migrationBuilder.DropTable(
                 name: "FichierJoint");
+
+            migrationBuilder.DropTable(
+                name: "Movie");
 
             migrationBuilder.DropTable(
                 name: "Courrier");
