@@ -5,5 +5,10 @@
         public int Id { get; set; }
         public string? Val { get; set; }
         public string? Desc { get; set; }
+        public Poste() { }
+        public Poste(String val)
+        {
+            Val = val;
+        }
     }
 }

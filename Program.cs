@@ -1,6 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using CourrierDocker_MBDS_31.Data;
+using CourrierDocker_MBDS_31.modeles;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +11,13 @@ builder.Services.AddDbContext<CourrierDocker_MBDS_31Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CourrierDocker_MBDS_31Context") ?? throw new InvalidOperationException("Connection string 'CourrierDocker_MBDS_31Context' not found.")));
 
 var app = builder.Build();
+//donnees par defauts
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
 
+    SeedData.Initialize(services);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

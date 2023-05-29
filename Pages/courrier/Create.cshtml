@@ -1,38 +1,170 @@
 ﻿@page
+@using CourrierDocker_MBDS_31.modeles.courrier;
 @model CourrierDocker_MBDS_31.Pages.courrier.CreateModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Courrier</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Courrier.Objet" class="control-label"></label>
-                <input asp-for="Courrier.Objet" class="form-control" />
-                <span asp-validation-for="Courrier.Objet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Courrier.DateCreation" class="control-label"></label>
-                <input asp-for="Courrier.DateCreation" class="form-control" />
-                <span asp-validation-for="Courrier.DateCreation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Courrier.Contenu" class="control-label"></label>
-                <input asp-for="Courrier.Contenu" class="form-control" />
-                <span asp-validation-for="Courrier.Contenu" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <!-- Area Chart -->
+                        <div class="col-md-12">
+                            <div class="card shadow">
+                                <!-- Titre contenu -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">
+                                        Saisie nouveau courrier
+                                    </h6>
+                                </div>
+                                <!--fin titre contenu-->
+                                <!-- Saisie du courrier -->
+                                <div class="card-body" id="liste-courrier">
+                                <form method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                        <div class="form-row">
+                                            <div class="col-md-10">
+                                                <input type="text" rows="1" id="destinataires" class="form-control form-control-user readonly" placeholder="Destinataires" required />
+                                            </div>
+                                            <button id="btn_destinataires_modif" class="btn btn-primary btn-user" type="button">Modifier</button>
+                                        </div>
+
+
+                                        <div id="destinataires_modif">r
+                                            <hr />
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Destinataires
+                                                </div>
+                                                <div class="card-body">
+                                                    <blockquote class="mb-0">
+                                                        <table width="100%" id="tab_dest">
+                                                            <thead></thead>
+                                                            <tbody id="liste_dest">
+                                                                <tr>
+                                                                    <td><input type="text" class="form-control" id="email_dest" placeholder="Adresse email"></td>
+                                                                    <td><btn id="btn_ajout_dest" type="button" class="btn btn-success">Ajouter</btn></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                            <label asp-for="PrioriteId" class="control-label">Priorite</label>
+                            <select asp-for="PrioriteId" class="form-control" asp-items="Model.Priorites">
+                                        </select>
+                                        <hr />
+                                        <div class="form-group">
+                                            <input asp-for="Courrier.Objet" class="form-control" placeholder="Objet"/>
+                                            <span asp-validation-for="Courrier.Objet" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea asp-for="Courrier.Contenu" class="form-control" rows="10"
+                                                      placeholder="Contenu" required></textarea>
+                                            <span asp-validation-for="Courrier.Contenu" class="text-danger"></span>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <u>Fichiers</u>
+                                                <a>Ajouter un fichier</a>
+                                            </div>
+                                        </div>
+                                        <!--Liste des fichiers-->
+                                        <div class="row">
+                                            <!--une piece jointe 3-->
+                                            <div class="col-xs-3">
+                                                <div class="card shadow h-100 py-2 courrier-card">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div style="width:150px;">
+                                                                <text class="text-black-50 small">Tsy ambolena coco.txt</text>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--fin une piece jointe 3-->
+                                            <!--une piece jointe 3-->
+                                            <div class="col-xs-3">
+                                                <div class="card courrier-card shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div style="width:150px;">
+                                                                <text class="text-black-50 small">CV-Blablablabla.zip</text>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--fin une piece jointe 3-->
+                                            <!--une piece jointe 3-->
+                                            <div class="col-xs-3">
+                                                <div class="card courrier-card shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div style="width:150px;">
+                                                                <text class="text-black-50 small">1-10-9-2.okok</text>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--fin une piece jointe 3-->
+                                            <!--une piece jointe 3-->
+                                            <div class="col-xs-3">
+                                                <div class="card courrier-card shadow h-100 py-2">
+                                                    <div class="card-body">
+                                                        <div class="row no-gutters align-items-center">
+                                                            <div style="width:150px;">
+                                                                <text class="text-black-50 small">wallpaper-asdxxxxx-dfd-xxl.png</text>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--fin une piece jointe 3-->
+                                        </div>
+                                        <hr />
+                                        <!--fin liste des fichiers-->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary btn-user btn-block">
+                                                    Envoyer le courrier
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <a href="">Enregistrer dans le brouillon sans envoyer</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--fin saisie du courrier-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 </div>
 
 <div>
@@ -42,3 +174,20 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<!-- Bootstrap core JavaScript-->
+<script src="~/mine/vendor/jquery/jquery.min.js"></script>
+<script src="~/mine/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="~/mine/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="~/mine/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="~/mine/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/mine/js/demo/chart-area-demo.js"></script>
+<script src="~/mine/js/demo/chart-pie-demo.js"></script>
+<script src="~/mine/js/ajout_ligne_dest.js"></script>

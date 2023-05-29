@@ -17,5 +17,16 @@ namespace CourrierDocker_MBDS_31.modeles.account
         public Departement? UserDepartement { get; set; }
         [Column("id_poste")]
         public Poste? UserPoste { get; set; }
+        public MyUser() { }
+        public MyUser(string nom, string prenom, DateTime dateNaissance, string email, string password, Departement? userDepartement, Poste? userPoste)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            DateNaissance = dateNaissance;
+            Email = email;
+            Password = password;
+            UserDepartement = userDepartement;
+            UserPoste = userPoste;
+        }
     }
 }
