@@ -131,13 +131,16 @@
                         <!-- Topbar Search -->
                         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher un courrier"
                                        aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
                                         <i class="fas fa-search fa-sm"></i>
                                     </button>
                                 </div>
+                                <button type="button" class="btn_search_multi">
+                                    <i class="fa" data-toggle="tooltip" title="Recherche avancée"><img src="~/mine/img/search_multi.png" /></i>
+                                </button>
                             </div>
                         </form>
 
@@ -331,6 +334,94 @@
                     </nav>
                     <!-- End of Topbar -->
                 <div class="container-fluid">
+                    <!--Recherche multi critere-->
+                    <div class="col-md-12" id="search_multi">
+                        <div class="card shadow">
+                            <!-- Titre contenu -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary btn_search_multi">Recherche multicritères</h6>
+
+                            </div>
+                            <!--fin titre contenu-->
+                            <!-- Liste des courriers -->
+                            <!-- Saisie du courrier -->
+                            <div class="card-body" id="liste-courrier">
+                                <form class="user" action="accueil-directeur.html" method="get">
+                                    <div class="form-row">
+                                        <div class="col-md-10">
+                                            <input type="text" rows="1" id="destinataires" class="form-control form-control-user" placeholder="Destinataires" onkeypress="return false;" />
+                                        </div>
+                                        <button id="btn_destinataires_modif" class="btn btn-primary btn-user" type="button">Modifier</button>
+                                    </div>
+
+
+                                    <div id="destinataires_modif">
+                                        <hr />
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Destinataires
+                                            </div>
+                                            <div class="card-body">
+                                                <blockquote class="mb-0">
+                                                    <table width="100%" id="tab_dest">
+                                                        <thead></thead>
+                                                        <tbody id="liste_dest">
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" id="email_dest" placeholder="Adresse email"></td>
+                                                                <td><btn id="btn_ajout_dest" type="button" class="btn btn-success">Ajouter</btn></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Date-->
+                                    <label>Date d'envoi :</label>
+                                    <div class="form-group">
+                                        <input type="date" class="form-control" />
+                                    </div>
+                                    <!--Priorite-->
+                                    <label>Priorité :</label>
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option>Pas de sélection</option>
+                                            <option>urgent</option>
+                                            <option>normal</option>
+                                        </select>
+                                    </div>
+                                    <!--Statut-->
+                                    <label>Statut :</label>
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option>Pas de sélection</option>
+                                            <option>Validé</option>
+                                            <option>Non validé</option>
+                                            <option>Validé par le directeur</option>
+                                        </select>
+                                    </div>
+
+                                    <hr />
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="2"
+                                                  placeholder="Éxtrait de texte à rechercher"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-primary btn-user btn-block">
+                                                Rechercher
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <!--fin saisie du courrier-->
+
+                        </div>
+                    </div>
+                    <!---fin recherche multi critere-->
                     <main role="main" class="pb-3">
                         @RenderBody()
                     </main>
@@ -406,6 +497,7 @@
         <!-- Page level custom scripts -->
         <script src="~/mine/js/demo/chart-area-demo.js"></script>
         <script src="~/mine/js/demo/chart-pie-demo.js"></script>
+        <script src="~/mine/js/search-multi.js"></script>
 
     </body>
     
