@@ -1,0 +1,115 @@
+﻿@page
+@{
+    Layout = null;
+}
+@model CourrierDocker_MBDS_31.Pages.user.SigninModel
+
+@{
+    ViewData["Title"] = "Signin";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Register</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/mine/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/mine/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            </div>
+                            <form class="user">
+                                <label asp-for="MyUser.Nom" class="control-label">Nom : </label>
+                                <div class="form-group">
+                                            <input asp-for="MyUser.Nom" class="form-control" placeholder="Votre nom"/>
+                                            <span asp-validation-for="MyUser.Nom" class="text-danger"></span>
+                                </div>
+                                <label asp-for="MyUser.Prenom" class="control-label">Prenom : </label>
+                                <div class="form-group">
+                                    <input asp-for="MyUser.Prenom" class="form-control" placeholder="Votre prenom" />
+                                    <span asp-validation-for="MyUser.Prenom" class="text-danger"></span>
+                                </div>
+                                <label asp-for="MyUser.DateNaissance" class="control-label">Date de naissance</label>
+                                <div class="form-group">
+                                    <input asp-for="MyUser.DateNaissance" class="form-control form-control-user"/>
+                                </div>
+                                <label asp-for="MyUser.UserDepartement" class="control-label">Departement</label>
+                                <div class="form-group">
+
+                               <select asp-for="MyUser.UserDepartementID" class="form-control" asp-items="Model.Departements">
+                                </select>
+
+                                </div>
+                                <label asp-for="MyUser.UserPoste" class="control-label">Postes</label>
+                                <div class="form-group">
+                                    <select asp-for="MyUser.UserPosteID" class="form-control" asp-items="Model.Postes"></select>
+
+                                </div>
+                                <label asp-for="MyUser.Email" class="control-label">Email</label>
+                                <div class="form-group">
+                                    <input asp-for="MyUser.Email" class="form-control form-control-user" placeholder="email" type="email"/>
+                                </div>
+                                <label asp-for="MyUser.Password" class="control-label">Mot de passe</label>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input asp-for="MyUser.Password" class="form-control form-control-user" placeholder="Mot de passe" type="password" />
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input asp-for="ConfirmPassword" class="form-control form-control-user" placeholder="Verification mot de passe" type="password" />
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-user btn-block">
+                                    Enregistrer votre compte
+                                </button>
+                            </form>
+                            <hr>
+
+                            <div class="text-center">
+                                <a class="small" href="login.html">Vous avez deja un compte? Connectez-vous!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/mine/vendor/jquery/jquery.min.js"></script>
+    <script src="~/mine/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/mine/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/mine/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

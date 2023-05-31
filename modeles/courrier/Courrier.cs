@@ -9,11 +9,11 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public String Objet { get; set; }
         public DateTime DateCreation { get; set; }
         public String Contenu { get; set; }
-        [Column("id_expediteur")]
         public MyUser? Expediteur { get; set; }
-        [Column("id_createur")]
+        public int ExpediteurID { get; set; }
         public MyUser Createur { get; set; }
-        [Column("id_priorite")]
+        public int CreateurID { get; set; }
         public Priorite? Priorite { get; set; }
+        public int PrioriteID { get; set; }
     }
 }

@@ -1,0 +1,60 @@
+﻿@page
+@model CourrierDocker_MBDS_31.Pages.user.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MyUser[0].Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyUser[0].Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyUser[0].DateNaissance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyUser[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MyUser[0].Password)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MyUser) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateNaissance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -12,9 +12,11 @@ namespace CourrierDocker_MBDS_31.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            bool connected = false;
+            string redirection = connected ? "/courrier" : "/user/Login";
+            return RedirectToPage(redirection);
         }
     }
 }

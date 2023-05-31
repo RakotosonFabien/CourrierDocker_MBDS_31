@@ -13,10 +13,10 @@ namespace CourrierDocker_MBDS_31.modeles.account
         public DateTime DateNaissance { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
-        [Column("id_departement")]
         public Departement? UserDepartement { get; set; }
-        [Column("id_poste")]
+        public int UserDepartementID { get; set; }
         public Poste? UserPoste { get; set; }
+        public int UserPosteID { get; set; }
         public MyUser() { }
         public MyUser(string nom, string prenom, DateTime dateNaissance, string email, string password, Departement? userDepartement, Poste? userPoste)
         {
