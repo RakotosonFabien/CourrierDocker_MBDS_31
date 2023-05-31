@@ -1,4 +1,6 @@
-﻿using CourrierDocker_MBDS_31.modeles.account;
+﻿using CourrierDocker_MBDS_31.Data;
+using CourrierDocker_MBDS_31.modeles.account;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourrierDocker_MBDS_31.modeles.courrier
@@ -15,5 +17,6 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public int CreateurID { get; set; }
         public Priorite? Priorite { get; set; }
         public int PrioriteID { get; set; }
+
     }
 }

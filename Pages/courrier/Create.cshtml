@@ -24,38 +24,12 @@
                                 <!-- Saisie du courrier -->
                                 <div class="card-body" id="liste-courrier">
                                 <form method="post">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                        <div class="form-row">
-                                            <div class="col-md-10">
-                                                <input type="text" rows="1" id="destinataires" class="form-control form-control-user readonly" placeholder="Destinataires" required />
-                                            </div>
-                                            <button id="btn_destinataires_modif" class="btn btn-primary btn-user" type="button">Modifier</button>
-                                        </div>
 
-
-                                        <div id="destinataires_modif">r
-                                            <hr />
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Destinataires
-                                                </div>
-                                                <div class="card-body">
-                                                    <blockquote class="mb-0">
-                                                        <table width="100%" id="tab_dest">
-                                                            <thead></thead>
-                                                            <tbody id="liste_dest">
-                                                                <tr>
-                                                                    <td><input type="text" class="form-control" id="email_dest" placeholder="Adresse email"></td>
-                                                                    <td><btn id="btn_ajout_dest" type="button" class="btn btn-success">Ajouter</btn></td>
-                                                                </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </blockquote>
-                                                </div>
-                                            </div>
-                                        </div>
-                            <label asp-for="Courrier.Priorite" class="control-label">Priorite</label>
-                            <select asp-for="Courrier.PrioriteID" class="form-control" asp-items="Model.Priorites">
+                                <label asp-for="DepDest" class="control-label">Departements destinataires</label>
+                                <select asp-for="DepDest" class="form-control" asp-items="Model.Departements" multiple>
+                                            </select>
+                                <label asp-for="Courrier.Priorite" class="control-label">Priorite</label>
+                                <select asp-for="Courrier.PrioriteID" class="form-control" asp-items="Model.Priorites">
                                         </select>
                                         <hr />
                                         <div class="form-group">

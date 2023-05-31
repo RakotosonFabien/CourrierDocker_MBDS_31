@@ -10,10 +10,17 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public DateTime? DateTransmission { get; set; }
         public DateTime? DateRecepSec { get; set; }
         public DateTime? DateRecepDr { get; set; }
-        [Column("id_dep_dest")]
         public Departement DepDest { get; set;}
-        [Column("id_courrier")]
+        public int DepDestID { get; set; }
         public Courrier Courrier { get; set;}
+        public int CourrierID { get; set; }
+        public Destinataire() { }
 
+        public Destinataire(DateTime? dateTransmission, int depDestID, int courrierID)
+        {
+            DateTransmission = dateTransmission;
+            DepDestID = depDestID;
+            CourrierID = courrierID;
+        }
     }
 }

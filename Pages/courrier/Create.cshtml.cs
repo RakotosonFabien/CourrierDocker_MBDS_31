@@ -27,13 +27,19 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
                 Value = p.Id.ToString(),
                 Text = p.Val
             }).ToList();
+            Departements = _context.Departement.Select(p => new SelectListItem { 
+                Value = p.Id.ToString(),
+                Text = p.Val
+            }).ToList();
             return Page();
         }
-
+        [BindProperty]
+        public string[] DepDest { get; set; }
         [BindProperty]
         public Courrier Courrier { get; set; } = default!;
         public int PrioriteId { get; set; } = default;
         public IList<SelectListItem> Priorites { get; set; } = default!;
+        public IList<SelectListItem> Departements { get; set; } = default!;
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -41,16 +47,24 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
         {
             //Courrier.Priorite = new Priorite();
             //Courrier.Priorite.Id = PrioriteId;
-            Courrier.CreateurID = 2;
-            Courrier.ExpediteurID = 2;
-          if (!ModelState.IsValid || _context.Courrier == null || Courrier == null)
+
+            Courrier.CreateurID = int.Parse(HttpContext.Session.GetString("userID"));
+            Courrier.ExpediteurID = int.Parse(HttpContext.Session.GetString("userID"));
+            if (_context.Courrier == null || Courrier == null)
             {
-                //return Page();
+                return Page();
             }
-
-            _context.Courrier.Add(Courrier);
-            await _context.SaveChangesAsync();
-
+            else
+            {
+                _context.Courrier.Add(Courrier);
+                await _context.SaveChangesAsync();
+                foreach (string destID in DepDest)
+                {
+                    Destinataire destinataire = new Destinataire(DateTime.Now, int.Parse(destID), Courrier.Id);
+                    _context.Destinataire.Add(destinataire);
+                }
+                await _context.SaveChangesAsync();
+            }
             return RedirectToPage("./Index");
         }
     }

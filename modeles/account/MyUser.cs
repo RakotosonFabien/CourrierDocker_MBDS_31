@@ -7,6 +7,7 @@ using CourrierDocker_MBDS_31.Data;
 using CourrierDocker_MBDS_31.modeles.courrier;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CourrierDocker_MBDS_31.modeles.account
 {
@@ -45,6 +46,16 @@ namespace CourrierDocker_MBDS_31.modeles.account
                 u=>u.Email == this.Email && u.Password == hashedPassword
             );
             return user;
+        }
+        public static List<MyUser> getDestinataires(CourrierDocker_MBDS_31Context _context, string[] emails)
+        {
+            return _context.MyUser.Where(user =>
+                emails.Contains(user.Email)).ToList();
+        }
+        public static List<MyUser> getDestinataires(CourrierDocker_MBDS_31Context _context, string emails)
+        {
+            string[] emailsArray = emails.Substring(0, emails.Length-2).Split(';');
+            return getDestinataires(_context, emailsArray);
         }
     }
 }
