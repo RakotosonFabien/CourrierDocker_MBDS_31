@@ -15,7 +15,7 @@ namespace CourrierDocker_MBDS_31.Pages.user
         private readonly CourrierDocker_MBDS_31.Data.CourrierDocker_MBDS_31Context _context;
         public IList<SelectListItem> Postes { get; set; } = default!;
         public IList<SelectListItem> Departements { get; set; } = default!;
-        public String ConfirmPassword { get; set; }
+
         public SigninModel(CourrierDocker_MBDS_31.Data.CourrierDocker_MBDS_31Context context)
         {
             _context = context;
@@ -38,7 +38,8 @@ namespace CourrierDocker_MBDS_31.Pages.user
 
         [BindProperty]
         public MyUser MyUser { get; set; } = default!;
-        
+        [BindProperty]
+        public String ConfirmPassword { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()

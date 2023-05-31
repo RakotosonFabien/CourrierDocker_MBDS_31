@@ -2,6 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BCrypt.Net;
+using CourrierDocker_MBDS_31.Pages.user;
+using CourrierDocker_MBDS_31.Data;
+using CourrierDocker_MBDS_31.modeles.courrier;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourrierDocker_MBDS_31.modeles.account
 {
@@ -31,8 +36,15 @@ namespace CourrierDocker_MBDS_31.modeles.account
         }
         public static string HashPassword(string password)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword("mangidy!"+password + "mamy!");
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, "$2b$12$MAMYMANGIDYBETSYVANONAEEE");
             return hashedPassword;
+        }
+        public MyUser Login(CourrierDocker_MBDS_31Context _context) {
+            String hashedPassword = MyUser.HashPassword(this.Password);
+            var user =  _context.MyUser.FirstOrDefault(
+                u=>u.Email == this.Email && u.Password == hashedPassword
+            );
+            return user;
         }
     }
 }

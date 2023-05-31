@@ -2,6 +2,8 @@
 @{
     Layout = null;
 }
+@model CourrierDocker_MBDS_31.Pages.user.LoginModel
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,20 +45,20 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Connexion</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="post">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input asp-for="MyUser.Email" type="email" class="form-control form-control-user"
                                                    id="exampleInputEmail" aria-describedby="emailHelp"
                                                    placeholder="Entrer votre nom complet">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input asp-for="MyUser.Password" type="password" class="form-control form-control-user"
                                                    id="exampleInputPassword" placeholder="Password">
                                         </div>
 
-                                        <a href="accueil-directeur.html" class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

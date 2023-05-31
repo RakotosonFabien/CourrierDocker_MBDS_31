@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CourrierDocker_MBDS_31.Data;
 using CourrierDocker_MBDS_31.modeles.account;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourrierDocker_MBDS_31.Pages.user
 {
@@ -31,15 +32,18 @@ namespace CourrierDocker_MBDS_31.Pages.user
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.MyUser == null || MyUser == null)
+          if (_context.MyUser == null || MyUser == null)
             {
                 return Page();
             }
 
-            _context.MyUser.Add(MyUser);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            MyUser userConnected = MyUser.Login(_context);
+            if (userConnected!=null)
+            {
+                HttpContext.Session.SetString("userID", userConnected.Id.ToString());
+                return RedirectToPage("/courrier");
+            }
+            return RedirectToPage("/user/Login");
         }
     }
 }
