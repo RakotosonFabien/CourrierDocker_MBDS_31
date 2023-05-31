@@ -19,6 +19,7 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public string PrioriteVal { get; set; }
         [AllowNull]
         public string DestinatairesVal{ get; set; }
+        public string ExpediteurVal { get; set; }
         public CourrierDetails() { }
     }
 }

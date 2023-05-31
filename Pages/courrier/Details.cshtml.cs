@@ -19,16 +19,16 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
             _context = context;
         }
 
-      public Courrier Courrier { get; set; } = default!; 
+      public CourrierDetails Courrier { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Courrier == null)
+            if (id == null || _context.CourrierDetails == null)
             {
                 return NotFound();
             }
 
-            var courrier = await _context.Courrier.FirstOrDefaultAsync(m => m.Id == id);
+            var courrier = await _context.CourrierDetails.FirstOrDefaultAsync(m => m.Id == id);
             if (courrier == null)
             {
                 return NotFound();

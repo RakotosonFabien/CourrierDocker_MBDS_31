@@ -4,34 +4,277 @@
 @{
     ViewData["Title"] = "Details";
 }
+<!-- Contenu de la page -->
+<div class="container-fluid">
+    <div class="card shadow">
+        <!-- Titre contenu -->
+        <div class="card-header">
+            <!--destinataire et ennvoyeur-->
+            <div class="row">
+                <div class="col-md-12">
+                    <text class="text-black-50 small">
+                        De
+                        <a href="" data-toggle="tooltip" title="Secretaire - Gestion de l'entreprise"> @Html.DisplayFor(model => model.Courrier.ExpediteurVal) </a>
+                        a
+                        <a href="" data-toggle="tooltip" title="Directeur - Gestion de l'entreprise">@Html.DisplayFor(model => model.Courrier.DestinatairesVal)</a>
+                        le @Html.DisplayFor(model => model.Courrier.DateCreation)
+                        (<text class="text-danger">@Html.DisplayFor(model => model.Courrier.PrioriteVal)</text>) |
+                        <!--si courrier recu-->
+                        <text class="text-success">
+                            <i class="fas fa-check" data-toggle="tooltip" title="Courrier deja recu"></i>
+                        </text>
+                        <!--sinon-->
+                        <text class="text-danger">
+                            <i class="fas fa-times" data-toggle="tooltip" title="Non recu"></i>
+                        </text>
+                        <!--fin courrier recu-->
+                    </text>
+                </div>
+            </div>
+            <hr />
+            <!--fin destinataire et envoyeur-->
+            <!-- contenu du courrier et objet-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>@Html.DisplayFor(model => model.Courrier.Objet)</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-black-50">
+                        @Html.DisplayFor(model => model.Courrier.Contenu)
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!--fin contenu et objet-->
+            <!--pieces jointes-->
+            <div class="row">
+                <div class="col-md-12">
+                    4 pieces jointes (<a href="">Telecharger tout</a>)
+                </div>
+            </div>
+            <div class="row">
+                <!--une piece jointe 3-->
+                <div class="col-xs-3">
+                    <div class="card shadow h-100 py-2 courrier-card">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div style="width:150px;">
+                                    <text class="text-black-50 small">Tsy ambolena coco.txt</text>
+                                </div>
+                                <div class="col-auto">
+                                    <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin une piece jointe 3-->
+                <!--une piece jointe 3-->
+                <div class="col-xs-3">
+                    <div class="card courrier-card shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div style="width:150px;">
+                                    <text class="text-black-50 small">CV-Blablablabla.zip</text>
+                                </div>
+                                <div class="col-auto">
+                                    <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin une piece jointe 3-->
+                <!--une piece jointe 3-->
+                <div class="col-xs-3">
+                    <div class="card courrier-card shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div style="width:150px;">
+                                    <text class="text-black-50 small">1-10-9-2.okok</text>
+                                </div>
+                                <div class="col-auto">
+                                    <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin une piece jointe 3-->
+                <!--une piece jointe 3-->
+                <div class="col-xs-3">
+                    <div class="card courrier-card shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div style="width:150px;">
+                                    <text class="text-black-50 small">wallpaper-asdxxxxx-dfd-xxl.png</text>
+                                </div>
+                                <div class="col-auto">
+                                    <a href=""><i class="fas fa-download fa-2x text-blue-300"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin une piece jointe 3-->
+            </div>
+            <!--fin pieces jointes-->
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#" class="btn-block btn btn-sm btn-primary shadow-sm" id="btn_commenter">
+                                <i class="fas fa-comments"></i>  Commenter
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn-block btn btn-sm btn-success shadow-sm">
+                                <i class="fas fa-check"></i> Courrier recu
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <text class="small float-right">
+                        Courrier cree par <a href="" data-toggle="tooltip" title="Receptionniste">Rakotobe createur</a>
+                    </text>
+                </div>
+            </div>
+        </div>
+        <!--fin titre contenu-->
+        <!--commentaire -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <u id="btn_list_commentaire"><text class="text-black-50 small">15 commentaires</text></u>
+                </div>
+            </div>
 
-<h1>Details</h1>
+            <!--mon commentaire-->
+            <div class="row" id="votre_commentaire">
 
-<div>
-    <h4>Courrier</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Courrier.Objet)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Courrier.Objet)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Courrier.DateCreation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Courrier.DateCreation)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Courrier.Contenu)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Courrier.Contenu)
-        </dd>
-    </dl>
+                <div class="col-md-12">
+                    <hr />
+                    <form action="" method="get">
+                        <textarea class="form-control bg-light border-0 small" placeholder="Votre commentaire" rows="2"></textarea>
+                        <button class="btn btn-sm btn-primary shadow-sm">
+                            Publier commentaire
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!--fin mon commentaire-->
+            <hr />
+            <!--commentaires des autres-->
+            <!--une commentaire des autres-->
+            <div id="list_commentaire">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-light text-black shadow">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <text class="text-black-50 small">
+                                            De <a href="" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">Rakotoson Fabien</a>
+                                        </text>
+                                        <hr />
+                                        <text class="text-black-50">
+                                            Contenu du commentaire
+
+                                        </text>
+                                    </div>
+                                </div>
+                                <!--fin importance du courrier-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin une commentaire autre-->
+                <!--une commentaire des autres-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card bg-light text-black shadow">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <text class="text-black-50 small">
+                                            De <a href="" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">Rakotoson Fabien</a>
+                                        </text>
+                                        <hr />
+                                        <text class="text-black-50">
+                                            Contenu du commentaire
+
+                                        </text>
+                                    </div>
+                                </div>
+                                <!--fin importance du courrier-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin une commentaire autre-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="" class="text-center">Afficher autres commentaires</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--fin commentaire-->
+
+    </div>
+
 </div>
+<!-- /.container-fluid -->
+<!-- Fin contenu de la page -->
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Courrier?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+
+<!-- Bootstrap core JavaScript-->
+<script src="~/mine/vendor/jquery/jquery.min.js"></script>
+<script src="~/mine/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="~/mine/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="~/mine/js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="~/mine/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/mine/js/demo/chart-area-demo.js"></script>
+<script src="~/mine/js/demo/chart-pie-demo.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#votre_commentaire').hide();
+        $('#list_commentaire').hide();
+        $('.courrier-card').hover(function () {
+            $(this).addClass('border-left-primary');
+            $(this).mouseleave(function () {
+                $(this).removeClass('border-left-primary');
+            });
+        });
+        $('#btn_list_commentaire').click(function () {
+            if ($('#list_commentaire').is(":hidden"))
+                $("#list_commentaire").toggle("slide");
+            else
+                $('#list_commentaire').hide("slow");
+        });
+        $('#btn_commenter').click(function () {
+            if ($('#votre_commentaire').is(":hidden"))
+                $("#votre_commentaire").toggle("slide");
+            else
+                $('#votre_commentaire').hide("slow");
+        });
+
+    });
+
+</script>
