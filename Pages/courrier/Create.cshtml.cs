@@ -50,6 +50,7 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
 
             Courrier.CreateurID = int.Parse(HttpContext.Session.GetString("userID"));
             Courrier.ExpediteurID = int.Parse(HttpContext.Session.GetString("userID"));
+            Courrier.DateCreation = DateTime.Now;
             if (_context.Courrier == null || Courrier == null)
             {
                 return Page();

@@ -45,141 +45,56 @@
                     <button class="btn btn-primary">Trier</button>
                 </div>
             </div>
-            <a href="courrier-directeur.html">
-                <div class="card bg-light text-black shadow courrier-card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <!--destinataire-->
-                            <div class="col-md-10 text-black-50">
-                                De
-                                <text class="text-primary" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">Rakotoson Fabien</text>
-                                a
-                                <text class="text-primary" data-toggle="tooltip" title="Directeur - Gestion Entreprise">Rakotoson Maminirina Fabien</text>
-                                <div class="text-black-50 small">
-                                    Courrier vaovao be le oui!
-                                </div>
-                            </div>
-                            <!--fin destinataire-->
-                            <div class="col-md-2">
-                                <div class="text-black-50 small float-right">12:05</div>
-                            </div>
-                        </div>
-
-                        <hr />
-                        <!--degre importance du courrier-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="text-black-50 small float-left">
-                                    Statut : <text class="text-success">
-                                        Valide
+                @foreach (var item in Model.Courrier)
+                {
+                <a asp-page="./Details" asp-route-id="@item.Id">
+ |
+                    <div class="card bg-light text-black shadow courrier-card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <text class="text-black-50">
+                                        De
+                                        <text class="text-primary" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">@Html.DisplayFor(modelItem => item.ExpediteurID)</text>
+                                        a
+                                        <text class="text-primary" data-toggle="tooltip" title="Directeur - Gestion Entreprise">@item.DestinatairesVal</text>
                                     </text>
+                                    <div class="text-black-50 small">
+                                        @item.Objet
+                                    </div>
+                                    <span data-toggle="tooltip" title="fichier.txt; fichier2.zip; Tsy ambolena coco.zip">2 fichiers</span>
+                                    <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="fas fa-download fa-sm text-white-50"></i> Telecharger fichiers
+                                    </a>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-black-50 small float-right">@item.DateCreation</div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="text-black-50 small float-right">
-                                    Priorite : <text class="text-danger">
-                                        Tres important
-                                    </text>
+                            <hr />
+                            <!--degre importance du courrier-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="text-black-50 small float-left">
+                                        Statut : <text class="text-success">
+                                            Valide
+                                        </text>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-black-50 small float-right">
+                                        Priorite : <text class="text-danger">
+                                            @item.PrioriteVal
+                                        </text>
+                                    </div>
                                 </div>
                             </div>
+                            <!--fin importance du courrier-->
+
                         </div>
-                        <!--fin importance du courrier-->
                     </div>
-                </div>
-            </a>
-            <!--autre courrier avec fichiers-->
-            <a href="courrier-directeur.html">
-                <div class="card bg-light text-black shadow courrier-card">
-
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <text class="text-black-50">
-                                    De
-                                    <text class="text-primary" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">Rakotoson Fabien</text>
-                                    a
-                                    <text class="text-primary" data-toggle="tooltip" title="Directeur - Gestion Entreprise">Rakotoson Maminirina Fabien</text>
-                                </text>
-                                <div class="text-black-50 small">
-                                    Objet du courrier 2
-                                </div>
-                                <span data-toggle="tooltip" title="fichier.txt; fichier2.zip; Tsy ambolena coco.zip">2 fichiers</span>
-                                <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                    <i class="fas fa-download fa-sm text-white-50"></i> Telecharger fichiers
-                                </a>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="text-black-50 small float-right">07/06/2021</div>
-                            </div>
-                        </div>
-                        <hr />
-                        <!--degre importance du courrier-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="text-black-50 small float-left">
-                                    Statut : <text class="text-success">
-                                        Valide
-                                    </text>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-black-50 small float-right">
-                                    Priorite : <text class="text-danger">
-                                        Tres important
-                                    </text>
-                                </div>
-                            </div>
-                        </div>
-                        <!--fin importance du courrier-->
-
-                    </div>
-                </div>
-            </a>
-            <!--autre courrier-->
-            <a href="courrier-directeur.html">
-                <div class="card bg-light text-black shadow courrier-card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <!--destinataire-->
-                            <div class="col-md-10 text-black-50">
-                                De
-                                <text class="text-primary" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">Rakotoson Fabien</text>
-                                a
-                                <text class="text-primary" data-toggle="tooltip" title="Directeur - Gestion Entreprise">Rakotoson Maminirina Fabien</text>
-                                <div class="text-black-50 small">
-                                    Courrier vaovao be le oui!
-                                </div>
-                            </div>
-                            <!--fin destinataire-->
-                            <div class="col-md-2">
-                                <div class="text-black-50 small float-right">12:05</div>
-                            </div>
-                        </div>
-
-                        <hr />
-                        <!--degre importance du courrier-->
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="text-black-50 small float-left">
-                                    Statut : <text class="text-success">
-                                        Valide
-                                    </text>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-black-50 small float-right">
-                                    Priorite : <text class="text-danger">
-                                        Tres important
-                                    </text>
-                                </div>
-                            </div>
-                        </div>
-                        <!--fin importance du courrier-->
-                    </div>
-                </div>
-            </a>
+                </a>
+                }
         </div>
         <!--fin liste des courriers-->
         <div class="row">

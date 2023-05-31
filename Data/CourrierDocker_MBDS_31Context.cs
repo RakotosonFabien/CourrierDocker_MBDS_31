@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CourrierDocker_MBDS_31.modeles;
+using CourrierDocker_MBDS_31.modeles.courrier;
 
 namespace CourrierDocker_MBDS_31.Data
 {
@@ -23,5 +24,12 @@ namespace CourrierDocker_MBDS_31.Data
         public DbSet<modeles.courrier.Priorite> Priorite { get; set; } = default!;
         public DbSet<modeles.structure.Departement> Departement { get; set; } = default!;
         public DbSet<modeles.structure.Poste> Poste { get; set; } = default!;
+        public DbSet<modeles.courrier.CourrierDetails> CourrierDetails { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CourrierDetails>().HasNoKey().ToView("CourrierDetails");
+        }
     }
 }
