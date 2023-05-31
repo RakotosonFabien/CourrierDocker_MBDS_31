@@ -1,6 +1,7 @@
 ﻿using CourrierDocker_MBDS_31.modeles.structure;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BCrypt.Net;
 
 namespace CourrierDocker_MBDS_31.modeles.account
 {
@@ -27,6 +28,11 @@ namespace CourrierDocker_MBDS_31.modeles.account
             Password = password;
             UserDepartement = userDepartement;
             UserPoste = userPoste;
+        }
+        public static string HashPassword(string password)
+        {
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword("mangidy!"+password + "mamy!");
+            return hashedPassword;
         }
     }
 }

@@ -47,7 +47,11 @@ namespace CourrierDocker_MBDS_31.Pages.user
             {
                 return Page();
             }
-
+            if (ConfirmPassword.CompareTo(MyUser.Password) != 0)
+            {
+                return Page();
+            }
+            MyUser.Password = MyUser.HashPassword(MyUser.Password);
             _context.MyUser.Add(MyUser);
             await _context.SaveChangesAsync();
 
