@@ -41,7 +41,7 @@ namespace CourrierDocker_MBDS_31.Pages.user
             if (userConnected!=null)
             {
                 HttpContext.Session.SetString("userID", userConnected.Id.ToString());
-                return RedirectToPage("/courrier");
+                return RedirectToPage("/courrier/Index");
             }
             return RedirectToPage("/user/Login");
         }

@@ -56,7 +56,7 @@ namespace CourrierDocker_MBDS_31.Pages.user
             _context.MyUser.Add(MyUser);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/user/Login");
         }
     }
 }

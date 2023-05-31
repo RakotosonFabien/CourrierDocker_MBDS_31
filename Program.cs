@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSession();
 builder.Services.AddDbContext<CourrierDocker_MBDS_31Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CourrierDocker_MBDS_31Context") ?? throw new InvalidOperationException("Connection string 'CourrierDocker_MBDS_31Context' not found.")));
 
@@ -28,7 +29,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
