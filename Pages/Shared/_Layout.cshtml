@@ -58,14 +58,14 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="accueil-directeur.html">
+                <a class="nav-link" asp-page="/courrier/Index" asp-route-type_courrier = "recu">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>Courriers recus</span>
                     <span class="badge badge-danger badge-counter">10+</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="accueil-directeur.html">
+                <a class="nav-link" asp-page="/courrier/Index" asp-route-type_courrier = "envoye">
                     <i class="fas fa-fw fa-paper-plane"></i>
                     <span>Courriers envoyes</span>
                 </a>

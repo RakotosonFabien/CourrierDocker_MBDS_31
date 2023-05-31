@@ -21,11 +21,26 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
 
         public IList<CourrierDetails> Courrier { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string? type_courrier)
         {
+            type_courrier = type_courrier == null ? "recu" : type_courrier;
+            int userID = int.Parse(HttpContext.Session.GetString("userID"));
             if (_context.CourrierDetails != null)
             {
-                Courrier = await _context.CourrierDetails.ToListAsync();
+                if (type_courrier.CompareTo("recu") == 0)
+                {
+                    //encore a modifier
+                    string query = "SELECT * FROM CourrierDetails AS c WHERE c.Id IN (SELECT CourrierID FROM Destinataire AS dest JOIN MyUser AS u ON u.UserDepartementId = dest.DepDestId AND u.Id = {0})";
+                    Courrier = await _context.CourrierDetails.
+                        FromSqlRaw(query, userID).
+                        ToListAsync();
+                }
+                else
+                {
+                    Courrier = await _context.CourrierDetails.
+                        Where(c => c.ExpediteurID == userID).
+                        ToListAsync();
+                }
             }
         }
     }
