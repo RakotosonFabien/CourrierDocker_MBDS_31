@@ -9,8 +9,9 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public int Id { get; set; }
         public String Contenu { get; set; }
         public DateTime DateCommentaire { get; set; }
+        [ForeignKey("CourrierID")]
         public Courrier Courrier { get; set; }
-        [ForeignKey("CommentateurId")]
+        [ForeignKey("CommentateurID")]
         [Required]
         public MyUser? Commentateur { get; set; }
     }

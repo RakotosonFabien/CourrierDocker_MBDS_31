@@ -11,12 +11,17 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public String Objet { get; set; }
         public DateTime DateCreation { get; set; }
         public String Contenu { get; set; }
+        [ForeignKey("ExpediteurID")]
         public MyUser? Expediteur { get; set; }
         public int ExpediteurID { get; set; }
-        public MyUser Createur { get; set; }
+        [ForeignKey("CreateurID")]
+        public MyUser? Createur { get; set; }
         public int CreateurID { get; set; }
+        [ForeignKey("CoursierID")]
+        public MyUser? Coursier { get; set; }
+        public int CoursierID { get; set; }
         public Priorite? Priorite { get; set; }
         public int PrioriteID { get; set; }
-
+        
     }
 }

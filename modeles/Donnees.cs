@@ -28,7 +28,11 @@ namespace CourrierDocker_MBDS_31.modeles
         };
         
         public static List<MyUser> myUsers = new List<MyUser>() {
-            new MyUser("RAKOTOSON", "Fabien", new DateTime(2001, 1, 2), "rakotosonfabienmaminirina@gmail.com", "123456", departements[0], postes[0])
+            new MyUser("RAKOTOSON", "Fabien", new DateTime(2001, 1, 2), "rakotosonfabienmaminirina@gmail.com", MyUser.HashPassword("123456"), departements[0], postes[0])
         };
+        public readonly static int DirecteurID = 1;
+        public readonly static int SecretaireID = 2;
+        public readonly static int CoursierID = 3;
+        public readonly static int ReceptionnisteID = 4;
     }
 }

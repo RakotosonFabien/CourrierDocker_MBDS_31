@@ -9,6 +9,7 @@ using CourrierDocker_MBDS_31.Data;
 using CourrierDocker_MBDS_31.modeles.courrier;
 using Microsoft.EntityFrameworkCore;
 using CourrierDocker_MBDS_31.modeles.account;
+using CourrierDocker_MBDS_31.modeles;
 
 namespace CourrierDocker_MBDS_31.Pages.courrier
 {
@@ -31,6 +32,13 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
                 Value = p.Id.ToString(),
                 Text = p.Val
             }).ToList();
+            Coursiers = _context.MyUser.
+            Where(p => p.UserPosteID == Donnees.CoursierID).
+            Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.Nom + " " + p.Prenom
+            }).ToList();
             return Page();
         }
         [BindProperty]
@@ -40,6 +48,7 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
         public int PrioriteId { get; set; } = default;
         public IList<SelectListItem> Priorites { get; set; } = default!;
         public IList<SelectListItem> Departements { get; set; } = default!;
+        public IList<SelectListItem> Coursiers { get; set; } = default!;
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
