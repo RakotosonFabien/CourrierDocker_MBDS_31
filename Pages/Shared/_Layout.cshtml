@@ -322,7 +322,7 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a asp-page="/user/Logout" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -475,7 +475,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" asp-page="/user/Logout">Logout</a>
                     </div>
                 </div>
             </div>
@@ -502,3 +502,13 @@
     </body>
     
 </html>
+<script>
+    $(document).ready(function () {
+        $('#userDropdown').click(function () {
+            if ($('#menu-deroulant').is(":hidden"))
+                $("#menu-deroulant").toggle("slide");
+            else
+                $('#menu-deroulant').hide("slow");
+        });
+    });
+</script>
