@@ -1,4 +1,5 @@
 ﻿using CourrierDocker_MBDS_31.modeles.account;
+using Microsoft.Identity.Client;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CourrierDocker_MBDS_31.modeles.courrier
@@ -20,6 +21,52 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         [AllowNull]
         public string DestinatairesVal{ get; set; }
         public string ExpediteurVal { get; set; }
+        public string DateRecepSec { get; set; } 
+        public string DateRecepDr { get; set; } 
         public CourrierDetails() { }
+        public string[] GetStatus()
+        {
+            string[] destinataires = DestinatairesVal.Split(",");
+            string[] dateRecepSec = DateRecepSec.Split(",");
+            string[] dateRecepDr = DateRecepDr.Split(",");
+            string[] tousStatus = new string[destinataires.Length];
+            for (int i = 0; i < destinataires.Length; i++) {
+                if (dateRecepDr[i].CompareTo("NULL") != 0)
+                {
+                    tousStatus[i] = destinataires[i] + " - Reçu par le directeur";
+                }
+                else if (dateRecepSec[i].CompareTo("NULL") != 0)
+                {
+                    tousStatus[i] = destinataires[i] + " - Reçu par le sécrétaire";
+                }
+                else { 
+                    tousStatus[i] = destinataires[i] + " - Courrier non reçu!";
+                }
+            }
+            return tousStatus;
+        }
+        public string[] GetStatusColor()
+        {
+            string[] destinataires = DestinatairesVal.Split(",");
+            string[] dateRecepSec = DateRecepSec.Split(",");
+            string[] dateRecepDr = DateRecepDr.Split(",");
+            string[] tousStatus = new string[destinataires.Length];
+            for (int i = 0; i < destinataires.Length; i++)
+            {
+                if (dateRecepDr[i].CompareTo("NULL") != 0)
+                {
+                    tousStatus[i] = "text-success";
+                }
+                else if (dateRecepSec[i].CompareTo("NULL") != 0)
+                {
+                    tousStatus[i] = "text-primary";
+                }
+                else
+                {
+                    tousStatus[i] = "text-danger";
+                }
+            }
+            return tousStatus;
+        }
     }
 }

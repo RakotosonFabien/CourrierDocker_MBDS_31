@@ -47,6 +47,21 @@
                 </div>
             </div>
             <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    @{
+                        for (int i = 0; i < @Model.Courrier.GetStatus().Length; i++)
+                        {
+                            <div class="text-black-50 small">
+                                Statut : <text class="@Model.Courrier.GetStatusColor()[@i]">
+                                    @Model.Courrier.GetStatus()[@i]
+                                </text>
+                            </div>
+                            <br />
+                        }
+                    }
+                </div>
+            </div>
             <!--fin contenu et objet-->
             <!--pieces jointes-->
             <div class="row">
