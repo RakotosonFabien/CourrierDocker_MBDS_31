@@ -1,6 +1,8 @@
 ﻿
+using CourrierDocker_MBDS_31.modeles.account;
 using CourrierDocker_MBDS_31.modeles.structure;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CourrierDocker_MBDS_31.modeles.courrier
 {
@@ -17,6 +19,10 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         [ForeignKey("CourrierID")]
         public Courrier Courrier { get; set;}
         public int CourrierID { get; set; }
+        [AllowNull]
+        [ForeignKey("DestInterneID")]
+        public Poste? DestInterne { get; set; }
+        public int? DestInterneID { get; set; }
         public Destinataire() { }
 
         public Destinataire(DateTime? dateTransmission, int depDestID, int courrierID)

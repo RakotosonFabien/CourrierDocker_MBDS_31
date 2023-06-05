@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourrierDocker_MBDS_31.Migrations
 {
     [DbContext(typeof(CourrierDocker_MBDS_31Context))]
-    [Migration("20230523044527_InitialCreate")]
+    [Migration("20230601074741_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -77,17 +77,17 @@ namespace CourrierDocker_MBDS_31.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserDepartementId")
+                    b.Property<int>("UserDepartementID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserPosteId")
+                    b.Property<int>("UserPosteID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserDepartementId");
+                    b.HasIndex("UserDepartementID");
 
-                    b.HasIndex("UserPosteId");
+                    b.HasIndex("UserPosteID");
 
                     b.ToTable("MyUser");
                 });
@@ -100,14 +100,14 @@ namespace CourrierDocker_MBDS_31.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CommentateurId")
+                    b.Property<int?>("CommentateurID")
                         .HasColumnType("int");
 
                     b.Property<string>("Contenu")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourrierId")
+                    b.Property<int>("CourrierID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCommentaire")
@@ -115,9 +115,9 @@ namespace CourrierDocker_MBDS_31.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CommentateurId");
+                    b.HasIndex("CommentateurID");
 
-                    b.HasIndex("CourrierId");
+                    b.HasIndex("CourrierID");
 
                     b.ToTable("Commentaire");
                 });
@@ -134,31 +134,92 @@ namespace CourrierDocker_MBDS_31.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreateurId")
+                    b.Property<int>("CoursierID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreateurID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ExpediteurId")
+                    b.Property<int>("ExpediteurID")
                         .HasColumnType("int");
 
                     b.Property<string>("Objet")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PrioriteId")
+                    b.Property<int>("PrioriteID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreateurId");
+                    b.HasIndex("CoursierID");
 
-                    b.HasIndex("ExpediteurId");
+                    b.HasIndex("CreateurID");
 
-                    b.HasIndex("PrioriteId");
+                    b.HasIndex("ExpediteurID");
+
+                    b.HasIndex("PrioriteID");
 
                     b.ToTable("Courrier");
+                });
+
+            modelBuilder.Entity("CourrierDocker_MBDS_31.modeles.courrier.CourrierDetails", b =>
+                {
+                    b.Property<string>("Contenu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreateurID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DateRecepDr")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DateRecepSec")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DestinatairesVal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ExpediteurID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExpediteurVal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Objet")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PrioriteID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PrioriteVal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("CreateurID");
+
+                    b.HasIndex("ExpediteurID");
+
+                    b.HasIndex("PrioriteID");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("CourrierDetails", (string)null);
                 });
 
             modelBuilder.Entity("CourrierDocker_MBDS_31.modeles.courrier.Destinataire", b =>
@@ -169,7 +230,7 @@ namespace CourrierDocker_MBDS_31.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CourrierId")
+                    b.Property<int>("CourrierID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DateRecepDr")
@@ -181,14 +242,14 @@ namespace CourrierDocker_MBDS_31.Migrations
                     b.Property<DateTime?>("DateTransmission")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepDestId")
+                    b.Property<int>("DepDestID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourrierId");
+                    b.HasIndex("CourrierID");
 
-                    b.HasIndex("DepDestId");
+                    b.HasIndex("DepDestID");
 
                     b.ToTable("Destinataire");
                 });
@@ -277,11 +338,15 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     b.HasOne("CourrierDocker_MBDS_31.modeles.structure.Departement", "UserDepartement")
                         .WithMany()
-                        .HasForeignKey("UserDepartementId");
+                        .HasForeignKey("UserDepartementID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("CourrierDocker_MBDS_31.modeles.structure.Poste", "UserPoste")
                         .WithMany()
-                        .HasForeignKey("UserPosteId");
+                        .HasForeignKey("UserPosteID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("UserDepartement");
 
@@ -292,12 +357,13 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     b.HasOne("CourrierDocker_MBDS_31.modeles.account.MyUser", "Commentateur")
                         .WithMany()
-                        .HasForeignKey("CommentateurId");
+                        .HasForeignKey("CommentateurID")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CourrierDocker_MBDS_31.modeles.courrier.Courrier", "Courrier")
                         .WithMany()
-                        .HasForeignKey("CourrierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CourrierID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Commentateur");
@@ -307,19 +373,58 @@ namespace CourrierDocker_MBDS_31.Migrations
 
             modelBuilder.Entity("CourrierDocker_MBDS_31.modeles.courrier.Courrier", b =>
                 {
+                    b.HasOne("CourrierDocker_MBDS_31.modeles.account.MyUser", "Coursier")
+                        .WithMany()
+                        .HasForeignKey("CoursierID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("CourrierDocker_MBDS_31.modeles.account.MyUser", "Createur")
                         .WithMany()
-                        .HasForeignKey("CreateurId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CreateurID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CourrierDocker_MBDS_31.modeles.account.MyUser", "Expediteur")
                         .WithMany()
-                        .HasForeignKey("ExpediteurId");
+                        .HasForeignKey("ExpediteurID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("CourrierDocker_MBDS_31.modeles.courrier.Priorite", "Priorite")
                         .WithMany()
-                        .HasForeignKey("PrioriteId");
+                        .HasForeignKey("PrioriteID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Coursier");
+
+                    b.Navigation("Createur");
+
+                    b.Navigation("Expediteur");
+
+                    b.Navigation("Priorite");
+                });
+
+            modelBuilder.Entity("CourrierDocker_MBDS_31.modeles.courrier.CourrierDetails", b =>
+                {
+                    b.HasOne("CourrierDocker_MBDS_31.modeles.account.MyUser", "Createur")
+                        .WithMany()
+                        .HasForeignKey("CreateurID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CourrierDocker_MBDS_31.modeles.account.MyUser", "Expediteur")
+                        .WithMany()
+                        .HasForeignKey("ExpediteurID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CourrierDocker_MBDS_31.modeles.courrier.Priorite", "Priorite")
+                        .WithMany()
+                        .HasForeignKey("PrioriteID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Createur");
 
@@ -332,14 +437,14 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     b.HasOne("CourrierDocker_MBDS_31.modeles.courrier.Courrier", "Courrier")
                         .WithMany()
-                        .HasForeignKey("CourrierId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CourrierID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CourrierDocker_MBDS_31.modeles.structure.Departement", "DepDest")
                         .WithMany()
-                        .HasForeignKey("DepDestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("DepDestID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Courrier");
@@ -351,7 +456,8 @@ namespace CourrierDocker_MBDS_31.Migrations
                 {
                     b.HasOne("CourrierDocker_MBDS_31.modeles.courrier.Courrier", "Courrier")
                         .WithMany()
-                        .HasForeignKey("CourrierId");
+                        .HasForeignKey("CourrierId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Courrier");
                 });

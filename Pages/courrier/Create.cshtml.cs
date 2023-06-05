@@ -23,6 +23,7 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
         
         public IActionResult OnGet(string? type_courrier)
         {
+            MyUser myUser = _context.MyUser.FirstOrDefault(u => u.Id == int.Parse(HttpContext.Session.GetString("userID")));
             if (type_courrier != null)
                 EstInterne = type_courrier.CompareTo("interne") == 0;
             else
@@ -40,7 +41,7 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
                 Text = p.Val
             }).ToList();
             Coursiers = _context.MyUser.
-            Where(p => p.UserPosteID == Donnees.CoursierID).
+            Where(u => u.UserPosteID == Donnees.CoursierID && u.UserDepartementID == myUser.UserDepartementID).
             Select(p => new SelectListItem
             {
                 Value = p.Id.ToString(),

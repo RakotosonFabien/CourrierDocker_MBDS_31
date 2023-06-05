@@ -4,6 +4,7 @@ using CourrierDocker_MBDS_31.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourrierDocker_MBDS_31.Migrations
 {
     [DbContext(typeof(CourrierDocker_MBDS_31Context))]
-    partial class CourrierDocker_MBDS_31ContextModelSnapshot : ModelSnapshot
+    [Migration("20230601133203_AjoutDestInterne")]
+    partial class AjoutDestInterne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,9 +134,6 @@ namespace CourrierDocker_MBDS_31.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CourrierRef")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CoursierID")
                         .HasColumnType("int");
 
@@ -169,10 +169,6 @@ namespace CourrierDocker_MBDS_31.Migrations
             modelBuilder.Entity("CourrierDocker_MBDS_31.modeles.courrier.CourrierDetails", b =>
                 {
                     b.Property<string>("Contenu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CourrierRef")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
