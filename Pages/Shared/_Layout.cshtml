@@ -150,8 +150,7 @@
                                 </button>
                             </div>
                         </form>
-
-                        <!-- Topbar Navbar -->
+                    <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
                             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -353,77 +352,64 @@
                             <!-- Liste des courriers -->
                             <!-- Saisie du courrier -->
                             <div class="card-body" id="liste-courrier">
-                                <form class="user" action="accueil-directeur.html" method="get">
-                                    <div class="form-row">
-                                        <div class="col-md-10">
-                                            <input type="text" rows="1" id="destinataires" class="form-control form-control-user" placeholder="Destinataires" onkeypress="return false;" />
-                                        </div>
-                                        <button id="btn_destinataires_modif" class="btn btn-primary btn-user" type="button">Modifier</button>
-                                    </div>
+                                    @if (ViewData["RechercheAvancee"] != null && (bool)ViewData["RechercheAvancee"])
+                                    {
+                                        <form class="user" asp-action="/courrier/Index" method="get">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <input name="ExpediteurSrch" class="form-control" placeholder="Expediteur" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input name="CourrierRefSrch" class="form-control" placeholder="Reference" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input name="ObjetSrch" class="form-control" placeholder="Objet" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input name="CoursierSrch" class="form-control" placeholder="Coursier" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Departement cible</label>
+                                                    <select name="DepDestSrch" class="form-control" asp-items="Model.Departements" multiple>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Poste interne cible</label>
+                                                    <select name="PosteSrch" class="form-control" asp-items="Model.Postes">
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Receptionniste</label>
+                                                    <input name="ReceptionnisteSrch" class="form-control" placeholder="Receptionniste" />
+                                                </div>
 
-
-                                    <div id="destinataires_modif">
-                                        <hr />
-                                        <div class="card">
-                                            <div class="card-header">
-                                                Destinataires
                                             </div>
-                                            <div class="card-body">
-                                                <blockquote class="mb-0">
-                                                    <table width="100%" id="tab_dest">
-                                                        <thead></thead>
-                                                        <tbody id="liste_dest">
-                                                            <tr>
-                                                                <td><input type="text" class="form-control" id="email_dest" placeholder="Adresse email"></td>
-                                                                <td><btn id="btn_ajout_dest" type="button" class="btn btn-success">Ajouter</btn></td>
-                                                            </tr>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Priorite</label>
+                                                    <select  name="PrioriteSrch" class="form-control" asp-items="Model.Priorites">
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="control-label">Statut</label>
+                                                    <select name="StatutSrch" class="form-control" asp-items="Model.Statuts">
+                                                    </select>
+                                                </div>
 
-                                                        </tbody>
-                                                    </table>
-                                                </blockquote>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!--Date-->
-                                    <label>Date d'envoi :</label>
-                                    <div class="form-group">
-                                        <input type="date" class="form-control" />
-                                    </div>
-                                    <!--Priorite-->
-                                    <label>Priorité :</label>
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option>Pas de sélection</option>
-                                            <option>urgent</option>
-                                            <option>normal</option>
-                                        </select>
-                                    </div>
-                                    <!--Statut-->
-                                    <label>Statut :</label>
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option>Pas de sélection</option>
-                                            <option>Validé</option>
-                                            <option>Non validé</option>
-                                            <option>Validé par le directeur</option>
-                                        </select>
-                                    </div>
+                                            <br />
 
-                                    <hr />
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="2"
-                                                  placeholder="Éxtrait de texte à rechercher"></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button class="btn btn-primary btn-user btn-block">
-                                                Rechercher
-                                            </button>
-                                        </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-primary btn-user btn-block">
+                                                        Recherche multicriteres
+                                                    </button>
+                                                </div>
 
+                                            </div>
+                                        </form>
+                                    }
                                     </div>
-                                </form>
-                            </div>
                             <!--fin saisie du courrier-->
 
                         </div>

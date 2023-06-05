@@ -2,7 +2,9 @@
 using CourrierDocker_MBDS_31.modeles.account;
 using CourrierDocker_MBDS_31.modeles.courrier;
 using CourrierDocker_MBDS_31.modeles.structure;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Extensions.ObjectPool;
 using System.Collections;
 
 namespace CourrierDocker_MBDS_31.modeles
@@ -34,5 +36,12 @@ namespace CourrierDocker_MBDS_31.modeles
         public readonly static int SecretaireID = 2;
         public readonly static int CoursierID = 3;
         public readonly static int ReceptionnisteID = 4;
+        public readonly static IList<SelectListItem> Statuts = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "Directeur", Text = "Reçu par le directeur" },
+            new SelectListItem { Value = "Secretaire", Text = "Reçu par le sécrétaire" },
+            new SelectListItem { Value = "Livre", Text = "Livraison conclu" },
+            new SelectListItem { Value = "Non recu", Text = "Courrier non reçu" }
+        };
     }
 }

@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using CourrierDocker_MBDS_31.Data;
 using CourrierDocker_MBDS_31.modeles.courrier;
 using CourrierDocker_MBDS_31.modeles.account;
+using CourrierDocker_MBDS_31.modeles.structure;
+using CourrierDocker_MBDS_31.modeles;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CourrierDocker_MBDS_31.Pages.courrier
 {
@@ -22,8 +25,20 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
         public bool Validable { get; set; }
         public CourrierDetails Courrier { get; set; } = default!;
         public MyUser MyUser { get; set; } = default!;
+        public IList<SelectListItem> Priorites { get; set; } = default!;
+        public IList<SelectListItem> Departements { get; set; } = default!;
+        public IList<SelectListItem> Postes { get; set; } = default!;
+        public IList<SelectListItem> Statuts { get; set; } = default!; 
+        public bool RechercheAvancee = true;
+
         public async Task<IActionResult> OnGetAsync(int? id)
-        {
+        {            
+            //Initialisation des donnees
+            Departements = Utils.DonneesStatiquesDepartements(_context);
+            Postes = Utils.DonneesStatiquesPostes(_context);
+            Priorites = Utils.DonneesStatiquesPriorites(_context);
+            Statuts = Donnees.Statuts;
+            //Fin initialisation des donnees
             if (id == null || _context.CourrierDetails == null)
             {
                 return NotFound();

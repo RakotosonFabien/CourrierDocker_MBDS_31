@@ -18,6 +18,7 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
         {
             _context = context;
         }
+        public bool RechercheAvancee = true;
 
         [BindProperty]
       public Courrier Courrier { get; set; } = default!;

@@ -14,8 +14,8 @@ namespace CourrierDocker_MBDS_31.Pages
 
         public IActionResult OnGet()
         {
-            bool connected = false;
-            string redirection = connected ? "/courrier" : "/user/Login";
+            bool connected = HttpContext.Session.GetString("userID")!=null?true:false;
+            string redirection = connected ? "/courrier/Index" : "/user/Login";
             return RedirectToPage(redirection);
         }
     }

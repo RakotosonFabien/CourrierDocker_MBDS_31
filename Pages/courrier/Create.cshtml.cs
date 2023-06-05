@@ -28,18 +28,12 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
                 EstInterne = type_courrier.CompareTo("interne") == 0;
             else
                 EstInterne = false;
-            Priorites = _context.Priorite.Select(p => new SelectListItem { 
-                Value = p.Id.ToString(),
-                Text = p.Val
-            }).ToList();
-            Departements = _context.Departement.Select(p => new SelectListItem { 
-                Value = p.Id.ToString(),
-                Text = p.Val
-            }).ToList();
-            Postes = _context.Poste.Select(p => new SelectListItem { 
-                Value = p.Id.ToString(),
-                Text = p.Val
-            }).ToList();
+            //Initialisation des donnees
+            Departements = Utils.DonneesStatiquesDepartements(_context);
+            Postes = Utils.DonneesStatiquesPostes(_context);
+            Priorites = Utils.DonneesStatiquesPriorites(_context);
+            Statuts = Donnees.Statuts;
+            //Fin initialisation des donnees
             Coursiers = _context.MyUser.
             Where(u => u.UserPosteID == Donnees.CoursierID && u.UserDepartementID == myUser.UserDepartementID).
             Select(p => new SelectListItem
@@ -62,6 +56,8 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
         public IList<SelectListItem> Departements { get; set; } = default!;
         public IList<SelectListItem> Coursiers { get; set; } = default!;
         public IList<SelectListItem> Postes { get; set; } = default!;
+        public IList<SelectListItem> Statuts { get; set; } = default!;
+        public bool RechercheAvancee = true;
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
