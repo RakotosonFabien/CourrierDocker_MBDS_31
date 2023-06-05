@@ -12,5 +12,11 @@
             Val = val;
             Desc = desc;
         }
+        public Priorite(int id, string val, string? desc)
+        {
+            Id = id;
+            Val = val;
+            Desc = desc;
+        }
     }
 }

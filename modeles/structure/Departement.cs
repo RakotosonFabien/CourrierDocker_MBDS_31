@@ -10,5 +10,10 @@
         {
             Val = val;
         }
+        public Departement(int id, String val)
+        {
+            Id = id;
+            Val = val;
+        }
     }
 }

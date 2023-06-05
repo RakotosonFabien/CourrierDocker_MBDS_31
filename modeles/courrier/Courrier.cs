@@ -22,6 +22,7 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public int CoursierID { get; set; }
         public Priorite? Priorite { get; set; }
         public int PrioriteID { get; set; }
+        public string? CourrierRef { get; set; }
         
     }
 }

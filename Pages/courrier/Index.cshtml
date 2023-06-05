@@ -58,6 +58,12 @@
                                         <text class="text-primary" data-toggle="tooltip" title="Secretaire - Gestion Entreprise">@Html.DisplayFor(modelItem => item.ExpediteurVal)</text>
                                         a
                                         <text class="text-primary" data-toggle="tooltip" title="Directeur - Gestion Entreprise">@item.DestinatairesVal</text>
+                                        @{
+                                            if(@item.CourrierRef != null)
+                                            {
+                                                <text> ( @Html.DisplayFor(modelItem => item.CourrierRef) ) </text>
+                                            }
+                                        }
                                     </text>
                                     <div class="text-black-50 small">
                                         @item.Objet

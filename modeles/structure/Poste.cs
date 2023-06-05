@@ -10,5 +10,10 @@
         {
             Val = val;
         }
+        public Poste(int id, String val)
+        {
+            Id = id;
+            Val = val;
+        }
     }
 }

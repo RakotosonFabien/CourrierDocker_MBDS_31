@@ -11,5 +11,5 @@ STRING_AGG(COALESCE(CONVERT(VARCHAR(19), d.DateRecepSec, 121), 'NULL'), ',') as 
 		ON d.CourrierId = c.Id
 	LEFT JOIN Departement dept
 		ON dept.Id = d.DepDestId
-	GROUP BY c.Id, c.Contenu, c.CreateurId, c.DateCreation, c.ExpediteurId, c.Objet, c.PrioriteId, p.Val, u.Nom, u.Prenom, c.CoursierID, coursier.Nom, coursier.Prenom
+	GROUP BY c.Id, c.Contenu, c.CreateurId, c.DateCreation, c.ExpediteurId, c.Objet, c.PrioriteId, c.CourrierRef, p.Val, u.Nom, u.Prenom, c.CoursierID, coursier.Nom, coursier.Prenom
 		;

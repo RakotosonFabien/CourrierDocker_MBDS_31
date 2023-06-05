@@ -10,21 +10,21 @@ namespace CourrierDocker_MBDS_31.modeles
     public class Donnees
     {
         public static List<Priorite> priorites = new List<Priorite>(){
-            new Priorite("Tres urgent", "Tres urgent"),
-            new Priorite("Normal", "Normal"),
-            new Priorite("Peut attendre", "Peut attendre")
+            new Priorite(1, "Tres urgent", "Tres urgent"),
+            new Priorite(2, "Normal", "Normal"),
+            new Priorite(3, "Peut attendre", "Peut attendre")
         };
         public static List<Departement> departements = new List<Departement>() {
-            new Departement("Informatique"),
-            new Departement("Comptabilite"),
-            new Departement("Finance"),
-            new Departement("Communication")
+            new Departement(1, "Informatique"),
+            new Departement(2, "Comptabilite"),
+            new Departement(3, "Finance"),
+            new Departement(4, "Communication")
         };
         public static List<Poste> postes = new List<Poste>() {
-            new Poste("Directeur"),
-            new Poste("Secretaire"),
-            new Poste("Coursier"),
-            new Poste("Receptionniste")
+            new Poste(1, "Directeur"),
+            new Poste(2, "Secretaire"),
+            new Poste(3, "Coursier"),
+            new Poste(4, "Receptionniste")
         };
         
         public static List<MyUser> myUsers = new List<MyUser>() {

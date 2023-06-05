@@ -36,10 +36,14 @@
                                             </select>
                                 }
                             }
-                                
-                                <label asp-for="Courrier.Priorite" class="control-label">Priorite</label>
-                                <select asp-for="Courrier.PrioriteID" class="form-control" asp-items="Model.Priorites">
-                                        </select>
+                                <div class="form-group">
+                                    <label asp-for="Courrier.CourrierRef" class="control-label">Reference</label>
+                                    <input asp-for="Courrier.CourrierRef" class="form-control" placeholder="Reference"/>
+                                    <span asp-validation-for="Courrier.CourrierRef" class="text-danger"></span>
+                                </div>
+                                    <label asp-for="Courrier.Priorite" class="control-label">Priorite</label>
+                                    <select asp-for="Courrier.PrioriteID" class="form-control" asp-items="Model.Priorites">
+                                    </select>
                                         <hr />
                                         <div class="form-group">
                                             <input asp-for="Courrier.Objet" class="form-control" placeholder="Objet"/>
