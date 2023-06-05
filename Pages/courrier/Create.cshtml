@@ -24,10 +24,19 @@
                                 <!-- Saisie du courrier -->
                                 <div class="card-body" id="liste-courrier">
                                 <form method="post">
-
-                                <label asp-for="DepDest" class="control-label">Departements destinataires</label>
-                                <select asp-for="DepDest" class="form-control" asp-items="Model.Departements" multiple>
+                            @{
+                                if (Model.EstInterne){
+                                    <label asp-for="PosteDest" class="control-label">Poste destinataire</label>
+                                    <select asp-for="PosteDest" class="form-control" asp-items="Model.Postes"> </select>
+                                }
+                                else
+                                {
+                                    <label asp-for="DepDest" class="control-label">Departements destinataires</label>
+                                    <select asp-for="DepDest" class="form-control" asp-items="Model.Departements" multiple>
                                             </select>
+                                }
+                            }
+                                
                                 <label asp-for="Courrier.Priorite" class="control-label">Priorite</label>
                                 <select asp-for="Courrier.PrioriteID" class="form-control" asp-items="Model.Priorites">
                                         </select>

@@ -28,8 +28,13 @@ namespace CourrierDocker_MBDS_31.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            // Configuration des relations avec DeleteBehavior.Restrict par défaut
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
             modelBuilder.Entity<CourrierDetails>().HasNoKey().ToView("CourrierDetails");
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

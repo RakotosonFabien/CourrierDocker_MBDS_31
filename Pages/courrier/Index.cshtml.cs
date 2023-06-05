@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CourrierDocker_MBDS_31.Data;
 using CourrierDocker_MBDS_31.modeles.courrier;
+using System.Drawing.Printing;
 
 namespace CourrierDocker_MBDS_31.Pages.courrier
 {
@@ -30,9 +31,9 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
                 if (type_courrier.CompareTo("recu") == 0)
                 {
                     //encore a modifier
-                    string query = "SELECT * FROM CourrierDetails AS c WHERE c.Id IN (SELECT CourrierID FROM Destinataire AS dest JOIN MyUser AS u ON u.UserDepartementId = dest.DepDestId AND u.Id = {0})";
+                    string query = "SELECT * FROM CourrierDetails AS c WHERE c.ExpediteurID != {0} AND c.Id IN (SELECT CourrierID FROM Destinataire AS dest JOIN MyUser AS u ON u.UserDepartementId = dest.DepDestId AND u.Id = {0})";
                     Courrier = await _context.CourrierDetails.
-                        FromSqlRaw(query, userID).
+                        FromSqlRaw(query, userID, userID).
                         ToListAsync();
                 }
                 else

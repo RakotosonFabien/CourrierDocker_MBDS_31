@@ -39,11 +39,18 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-            <!--Nouveau courrier-->
+            <!--Nouveau courrier externe-->
             <li class="nav-item active">
                 <a class="nav-link" asp-page="/courrier/create">
                     <i class="fas fa-fw fa-plus"></i>
-                    <span>Nouveau courrier</span>
+                    <span>Nouveau courrier externe</span>
+                </a>
+            </li>
+            <!--Nouveau courrier interne-->
+            <li class="nav-item active">
+                <a class="nav-link" asp-page="/courrier/create" asp-route-type_courrier="interne">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Nouveau courrier interne</span>
                 </a>
             </li>
 
