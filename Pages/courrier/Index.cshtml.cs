@@ -55,16 +55,22 @@ namespace CourrierDocker_MBDS_31.Pages.courrier
                 if (type_courrier.CompareTo("recu") == 0)
                 {
                     //encore a modifier
-                    string query = "SELECT * FROM CourrierDetails AS c WHERE c.ExpediteurID != {0} AND c.Id IN (SELECT CourrierID FROM Destinataire AS dest JOIN MyUser AS u ON u.UserDepartementId = dest.DepDestId AND u.Id = {0})";
-                    Courrier = await _context.CourrierDetails.
-                        FromSqlRaw(query, userID, userID).
-                        ToListAsync();
+                    /*string query = "SELECT * FROM CourrierDetails AS c WHERE c.ExpediteurID != {0} AND c.Id IN (SELECT CourrierID FROM Destinataire AS dest JOIN MyUser AS u ON u.UserDepartementId = dest.DepDestId AND u.Id = {0})";
+                                    Courrier = await _context.CourrierDetails.
+                    FromSqlRaw(query, userID, userID).
+                    ToListAsync();*/
+                    //vaovao
+                    Courrier = await CourrierDetails.RechercheMultiQueryRecu(_context, userID, HttpContext.Request.Query["ExpediteurSrch"], HttpContext.Request.Query["CourrierRefSrch"], HttpContext.Request.Query["objetSrch"], HttpContext.Request.Query["CoursierSrch"], DepDestSrch, PosteSrch, ReceptionnisteSrch, PrioriteSrch, StatutSrch)
+                        .ToListAsync();
+                    string x = "ok";
                 }
                 else
                 {
-                    Courrier = await _context.CourrierDetails.
+                    /*Courrier = await _context.CourrierDetails.
                         Where(c => c.ExpediteurID == userID).
-                        ToListAsync();
+                        ToListAsync();*/
+                    Courrier = await CourrierDetails.RechercheMultiQueryEnvoye(_context, userID, HttpContext.Request.Query["ExpediteurSrch"], HttpContext.Request.Query["CourrierRefSrch"], HttpContext.Request.Query["objetSrch"], HttpContext.Request.Query["CoursierSrch"], DepDestSrch, PosteSrch, ReceptionnisteSrch, PrioriteSrch, StatutSrch)
+                        .ToListAsync();
                 }
             }
         }

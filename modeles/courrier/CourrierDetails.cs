@@ -1,6 +1,8 @@
 ﻿using CourrierDocker_MBDS_31.Data;
 using CourrierDocker_MBDS_31.modeles.account;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CourrierDocker_MBDS_31.modeles.courrier
@@ -26,7 +28,11 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
         public string DateRecepSec { get; set; } 
         public string DateRecepDr { get; set; } 
         public string DateRecepLiv { get; set; } 
+        public string CoursierVal { get; set; }
         public CourrierDetails() { }
+        /**
+         * Renvoie le commentaire de la statut actuel du courrier
+         */
         public string[] GetStatus()
         {
             string[] destinataires = DestinatairesVal.Split(",");
@@ -53,6 +59,9 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
             }
             return tousStatus;
         }
+        /**
+         * Couleur de la statut du courrier
+         */
         public string[] GetStatusColor()
         {
             string[] destinataires = DestinatairesVal.Split(",");
@@ -81,6 +90,9 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
             }
             return tousStatus;
         }
+        /**
+         * Verifie se le courrier peut encore etre valide par l'utilisateur
+         */
         public bool CourrierValidable(CourrierDocker_MBDS_31Context _context, MyUser myUser)
         {
             Destinataire destinataire = _context.Destinataire.FirstOrDefault(
@@ -102,6 +114,100 @@ namespace CourrierDocker_MBDS_31.modeles.courrier
                 }
             }
             return false;
+        }
+        public async static Task<IList<CourrierDetails>> RechercheMulti(CourrierDocker_MBDS_31Context _context, string? expediteur, string? reference, string? objet, string? coursier, string[]? depDest, string? poste, string? receptionniste, string? priorite, string? statut)
+        {
+            IQueryable<CourrierDetails> query = _context.CourrierDetails;
+            if (!expediteur.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.ExpediteurID == int.Parse(expediteur));
+            }
+            if (!reference.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.CourrierRef.Contains(reference));
+            }
+            if (!objet.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.Objet.Contains(objet));
+            }
+            if (!coursier.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.CoursierVal.Contains(coursier));
+            }
+            if (!depDest.IsNullOrEmpty())
+            {
+                //a remplir
+            }
+            if (!poste.IsNullOrEmpty())
+            {
+                //a remplir
+            }
+            IList<CourrierDetails> courriers = await query.ToListAsync();
+            return courriers;
+        }
+        public static IQueryable<CourrierDetails> RechercheMultiQueryRecu(CourrierDocker_MBDS_31Context _context, int userID, string? expediteur, string? reference, string? objet, string? coursier, string[]? depDest, string? poste, string? receptionniste, string? priorite, string? statut)
+        {
+            IQueryable<CourrierDetails> query = _context.CourrierDetails
+            .Where(c => c.ExpediteurID != userID &&
+            _context.Destinataire
+            .Join(_context.MyUser, dest => dest.DepDestID, u => u.UserDepartementID, (dest, u) => new { Dest = dest, User = u })
+            .Any(joinResult => joinResult.User.Id == userID && joinResult.Dest.CourrierID == c.Id));
+            if (!expediteur.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.ExpediteurID == int.Parse(expediteur));
+            }
+            if (!reference.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.CourrierRef.Contains(reference));
+            }
+            if (!objet.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.Objet.Contains(objet));
+            }
+            if (!coursier.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.CoursierVal.Contains(coursier));
+            }
+            if (!depDest.IsNullOrEmpty())
+            {
+                //a remplir
+            }
+            if (!poste.IsNullOrEmpty())
+            {
+                //a remplir
+            }
+            return query;
+        }
+        public static IQueryable<CourrierDetails> RechercheMultiQueryEnvoye(CourrierDocker_MBDS_31Context _context, int userID, string? expediteur, string? reference, string? objet, string? coursier, string[]? depDest, string? poste, string? receptionniste, string? priorite, string? statut)
+        {
+            IQueryable<CourrierDetails> query = _context.CourrierDetails
+            .Where(c => c.ExpediteurID == userID);
+
+            if (!expediteur.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.ExpediteurID == int.Parse(expediteur));
+            }
+            if (!reference.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.CourrierRef.Contains(reference));
+            }
+            if (!objet.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.Objet.Contains(objet));
+            }
+            if (!coursier.IsNullOrEmpty())
+            {
+                query = query.Where(c => c.CoursierVal.Contains(coursier));
+            }
+            if (!depDest.IsNullOrEmpty())
+            {
+                //a remplir
+            }
+            if (!poste.IsNullOrEmpty())
+            {
+                //a remplir
+            }
+            return query;
         }
     }
 }
